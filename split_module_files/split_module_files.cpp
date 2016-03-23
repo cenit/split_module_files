@@ -26,6 +26,7 @@
 #include <boost/filesystem.hpp>
 
 #define SPLITTED_FOLDERNAME "split"
+
 void split_modules(std::string &);
 bool enable_debug = true;
 
@@ -80,13 +81,19 @@ void split_modules(std::string & file_name) {
   file_to_parse.close();
   if (enable_debug) std::cout << "Parsed file " << file_name << ", produced " << parsed.size() << " module files." << std::endl;
 
-  if (!boost::filesystem::exists(SPLITTED_FOLDERNAME)) {
-    boost::filesystem::create_directories(SPLITTED_FOLDERNAME);
+  boost::filesystem::path folder = SPLITTED_FOLDERNAME;
+
+  if (!boost::filesystem::exists(folder)) {
+    boost::filesystem::create_directories(folder);
   }
 
   for (size_t i = 0; i < parsed.size(); i++) {
     std::stringstream modulename;
+#ifdef _WIN32
+    modulename << std::string(SPLITTED_FOLDERNAME) << std::string("\\") << module_names[i] << extension;
+#else
     modulename << std::string(SPLITTED_FOLDERNAME) << std::string("/") << module_names[i] << extension;
+#endif
     if (enable_debug) std::cout << "Opening file " << modulename.str() << " to write " << parsed[i].size() << " lines" << std::endl;
     std::ofstream modulo(modulename.str());
     for (auto riga : parsed[i]) modulo << riga << std::endl;
