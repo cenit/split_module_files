@@ -206,5 +206,4 @@ cnaf.intel
 *.F95
 *.f03
 *.F03
-
-
+*.VC.db
