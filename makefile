@@ -2,7 +2,7 @@
 EXE = split_module_files.exe
 
 all: dirtree
-	$(CXX) -std=c++11 -o bin/$(EXE) split_module_files/split_module_files.cpp
+	$(CXX) -std=c++11 -o bin/$(EXE) split_module_files/split_module_files.cpp -lboost_filesystem -lboost_system
 
 dirtree:
 	mkdir -p bin
