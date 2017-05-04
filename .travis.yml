@@ -13,8 +13,8 @@ addons:
     sources:
     - ubuntu-toolchain-r-test
     packages:
-    - gcc-5
-    - g++-5
+    - gcc-6
+    - g++-6
     - libboost-all-dev
 
 matrix:
@@ -26,8 +26,7 @@ matrix:
 
 install:
   # Linux Setup 
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then if [ "$CXX" = "g++" ]; then export CXX="g++-5" CC="gcc-5" ;fi                             ;fi
-# OSX Setup 
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then if [ "$CXX" = "g++" ]; then export CXX="g++-6" CC="gcc-6" ;fi                             ;fi
 
 script:
   - mkdir build && cd build && cmake .. && cmake --build . --target install && cd ..
