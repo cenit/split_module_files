@@ -6,8 +6,6 @@ set (CMAKE_CXX_STANDARD 11)
 if (MSVC)
   add_definitions(-D_SCL_SECURE_NO_WARNINGS)
   add_definitions(-D_CRT_SECURE_NO_WARNINGS)
-  set(Boost_USE_STATIC_LIBS ON)
-  set(Boost_USE_STATIC_RUNTIME ON)
 endif()
 
 find_package(Boost COMPONENTS system filesystem REQUIRED)
