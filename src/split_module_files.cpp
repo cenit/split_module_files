@@ -1,4 +1,4 @@
-/*                 Copyright 2016 - Stefano Sinigardi                  */
+/*              Copyright 2016-2017 - Stefano Sinigardi                */
 
 /************************************************************************
 * This program is free software: you can redistribute it and/or modify  *
@@ -15,7 +15,6 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>. *
 ************************************************************************/
 
-#define _SCL_SECURE_NO_WARNINGS
 #include <iostream>
 #include <cstdlib>
 #include <fstream>
@@ -26,6 +25,11 @@
 #include <boost/filesystem.hpp>
 
 #define SPLITTED_FOLDERNAME "split"
+#ifdef _WIN32
+#define FOLDERSEPARATOR "\\"
+#else
+#define FOLDERSEPARATOR "/"
+#endif
 
 void print_module_files(std::vector<std::string>&, std::vector<std::vector<std::string>>&);
 void check_duplicate_modules(std::vector<std::string>&);
@@ -64,11 +68,7 @@ void print_module_files(std::vector<std::string>& module_names, std::vector<std:
 
   for (size_t i = 0; i < parsed.size(); i++) {
     std::stringstream modulename;
-#ifdef _WIN32
-    modulename << std::string(SPLITTED_FOLDERNAME) << std::string("\\") << module_names[i];
-#else
-    modulename << std::string(SPLITTED_FOLDERNAME) << std::string("/") << module_names[i];
-#endif
+    modulename << std::string(SPLITTED_FOLDERNAME) << std::string(FOLDERSEPARATOR) << module_names[i];
     if (enable_debug) std::cout << "Opening file " << modulename.str() << " to write " << parsed[i].size() << " lines" << std::endl;
     std::ofstream modulo(modulename.str());
     for (auto riga : parsed[i]) modulo << riga << std::endl;

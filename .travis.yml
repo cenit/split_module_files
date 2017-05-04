@@ -1,12 +1,34 @@
-language: c++
-compiler:
-  - gcc
-before_install:
-  - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
-  - sudo add-apt-repository -y ppa:boost-latest/ppa
-  - sudo apt-get update -qq
+language: cpp
+
+os:
+  - linux
+  - osx
+
+compiler: 
+    - gcc
+    - clang
+
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - gcc-5
+    - g++-5
+    - libboost-all-dev
+
+matrix:
+    exclude:
+    - os: osx
+      compiler: gcc
+    - os: linux
+      compiler: clang
+
 install:
-  - sudo apt-get install -qq g++-4.8 libboost1.55-all-dev 
-  - export CXX="g++-4.8"
+  # Linux Setup 
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then if [ "$CXX" = "g++" ]; then export CXX="g++-5" CC="gcc-5" ;fi                             ;fi
+# OSX Setup 
+
 script:
-  - make all
+  - mkdir build && cd build && cmake .. && cmake --build . --target install && cd ..
+
