@@ -12,10 +12,11 @@ addons:
   apt:
     sources:
     - ubuntu-toolchain-r-test
+    - sourceline: 'ppa:boost-latest/ppa'
     packages:
     - gcc-6
     - g++-6
-    - libboost-all-dev
+    - libboost1.55-all-dev
 
 matrix:
     exclude:
