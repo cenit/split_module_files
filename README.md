@@ -3,6 +3,9 @@
 
 
 ### Installation
-**CMake** and a **C++11** compatible compiler are required.  
-Type `mkdir build && cd build && cmake .. && cmake --build . --target install` to build the executable and prepare it in a `bin` folder inside the project.
+**CMake** and a **C++11** compatible compiler are required. To build the executable, clone the repo and then type  
+```
+mkdir build ; cd build ; cmake .. ; cmake --build . --target install
+```
+With CMake you can also deploy projects for the most common IDEs.  
 
