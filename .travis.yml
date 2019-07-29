@@ -4,7 +4,7 @@ os:
   - linux
   - osx
 
-compiler: 
+compiler:
     - gcc
     - clang
 
@@ -12,11 +12,10 @@ addons:
   apt:
     sources:
     - ubuntu-toolchain-r-test
-    - sourceline: 'ppa:boost-latest/ppa'
     packages:
     - gcc-6
     - g++-6
-    - libboost1.55-all-dev
+    - libboost-all-dev
 
 matrix:
     exclude:
@@ -26,9 +25,8 @@ matrix:
       compiler: clang
 
 install:
-  # Linux Setup 
+  # Linux Setup
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then if [ "$CXX" = "g++" ]; then export CXX="g++-6" CC="gcc-6" ;fi                             ;fi
 
 script:
   - mkdir build && cd build && cmake .. && cmake --build . --target install && cd ..
-
