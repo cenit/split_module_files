@@ -1,0 +1,13 @@
+{
+  "name": "split-module-files",
+  "version": "1.0.0",
+  "homepage": "https://github.com/cenit/split_module_files",
+  "description": "",
+  "dependencies":
+  [
+    "boost-system",
+    "boost-filesystem",
+    "boost-algorithm"
+  ],
+  "builtin-baseline": "095ee06e7f60dceef7d713e3f8b1c2eb10d650d7"
+}
